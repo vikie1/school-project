@@ -5,6 +5,7 @@ import javax.persistence.Embeddable;
 /**
  * Location.java Object, Stores details that can be used to find
  *  the location or at least a rough estimate of the locale
+ *  using Google Geolocation api
  */
 @Embeddable
 public class Location {
