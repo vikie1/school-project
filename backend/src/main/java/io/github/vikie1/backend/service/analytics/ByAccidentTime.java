@@ -5,6 +5,7 @@ import io.github.vikie1.backend.model.analytics.ByTime;
 import io.github.vikie1.backend.repository.analytics.ByTimeRepository;
 import io.github.vikie1.backend.util.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,8 @@ public class ByAccidentTime {
     }
     public List<ByTime> getPopular(long lowestValue){
         return byTimeRepository.findByTotalAccidentsGreaterThanEqual(lowestValue);
+    }
+    public List<ByTime> get(){
+        return byTimeRepository.findAll(Sort.by(Sort.Direction.DESC, "totalAccidents"));
     }
 }

@@ -23,7 +23,7 @@ public class AccidentsAPI {
         Map<String, List<AccidentModel>> result = new HashMap<>();
         List<AccidentModel> allAccidentsList = accidentsService.get();
 
-        if (allAccidentsList.isEmpty())
+        if (allAccidentsList == null || allAccidentsList.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There exists no data for your query");
 
         result.put("allAccidents", allAccidentsList);
@@ -43,7 +43,7 @@ public class AccidentsAPI {
         Map<String, List<AccidentModel>> result = new HashMap<>();
         List<AccidentModel> todayAccidentsList = accidentsService.getToday();
 
-        if (todayAccidentsList.isEmpty())
+        if (todayAccidentsList == null || todayAccidentsList.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There have been no accident reports today");
 
         result.put("accidentsReportedToday", todayAccidentsList);
@@ -54,7 +54,7 @@ public class AccidentsAPI {
         Map<String, List<AccidentModel>> result = new HashMap<>();
         List<AccidentModel> accidentsList = accidentsService.getByDate(date);
 
-        if (accidentsList.isEmpty())
+        if (accidentsList == null || accidentsList.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There were no accidents reported on" + date.toString());
 
         result.put("accidentsReportedByDate", accidentsList);
