@@ -1,5 +1,6 @@
 package io.github.vikie1.backend.model;
 
+import io.github.vikie1.backend.model.analytics.ByTime;
 import io.github.vikie1.backend.pojo.AccidentData;
 import io.github.vikie1.backend.pojo.Location;
 
@@ -17,6 +18,9 @@ public class AccidentModel {
     private String reporterEmail;
     private String reporterContact;
 
+    @ManyToOne @JoinColumn(name = "by_time_id")
+    private ByTime timeAnalytics;
+
     public AccidentModel() {}
     public AccidentModel(String reporterContact, String reporterEmail, String reporterName,
                          Location location, AccidentData accidentData) {
@@ -32,6 +36,14 @@ public class AccidentModel {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ByTime getByTime() {
+        return timeAnalytics;
+    }
+
+    public void setByTime(ByTime byTime) {
+        this.timeAnalytics = byTime;
     }
 
     public Location getLocation() {
