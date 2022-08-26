@@ -10,9 +10,6 @@ public class StatisticalClasses {
         LATE_NIGHT("10:00pm - 12:59pm"),
         WEE_HOURS("1:00am - 3:59am");
 
-        private String value;
-        private TimeIntervals(String s) {
-            this.value = s;
-        }
+        private TimeIntervals(String s) {}
     }
 }

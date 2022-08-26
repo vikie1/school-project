@@ -9,16 +9,12 @@ public class ByTime {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id", nullable = false)
     private Long id;
     private long totalAccidents;
-    private String city;
-    private String locality;
     @Column(nullable = false, unique = true)
     private String timeSlot;
 
     public ByTime() {}
-    public ByTime(long totalAccidents, String city, String locality, String timeSlot) {
+    public ByTime(long totalAccidents, String timeSlot) {
         this.totalAccidents = totalAccidents;
-        this.city = city;
-        this.locality = locality;
         this.timeSlot = timeSlot;
     }
 
@@ -32,22 +28,6 @@ public class ByTime {
 
     public long getTotalAccidents() {
         return totalAccidents;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getLocality() {
-        return locality;
-    }
-
-    public void setLocality(String locality) {
-        this.locality = locality;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public void setTotalAccidents(long totalAccidents) {
