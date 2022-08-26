@@ -61,13 +61,14 @@ public class AccidentsAPI {
         return result;
     }
 
+    //POST
     @RequestMapping(method = RequestMethod.POST) @PostMapping("/")
     public void create(@RequestBody AccidentModel accidentModel){
          accidentsService.add(accidentModel);
     }
 
+    //PUT
     @RequestMapping(method = RequestMethod.PUT) @PutMapping("/")
-    @ResponseBody
     public void update(@RequestBody AccidentModel accidentModel) {
         accidentsService.update(accidentModel);
     }

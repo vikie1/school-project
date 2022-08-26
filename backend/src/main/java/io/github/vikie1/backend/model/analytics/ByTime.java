@@ -1,10 +1,10 @@
-package io.github.vikie1.backend.model;
+package io.github.vikie1.backend.model.analytics;
 
 import javax.persistence.*;
 
 @Entity
-public class AnalyticsModel {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) @Column(name = "id", nullable = false)
+public class ByTime {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id", nullable = false)
     private Long id;
 
     public Long getId() {
