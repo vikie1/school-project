@@ -15,7 +15,11 @@ export const Header = ({ pageTitle }) => {
       <title>{pageTitle} | School Project</title>
 
       <header css={navPosition}>
-        <div css={textLeft}>Accident<br />Tracker</div>
+        <div css={textLeft}>
+          Accident
+          <br />
+          Tracker
+        </div>
 
         <nav css={navSizing}>
           <ul css={listStyle}>
@@ -32,6 +36,11 @@ export const Header = ({ pageTitle }) => {
             <li>
               <Link to={"/analytics"} css={linkStyle}>
                 Statistics
+              </Link>
+            </li>
+            <li>
+              <Link to={"/report"} css={linkStyle}>
+                Report
               </Link>
             </li>
             <li>
@@ -78,6 +87,7 @@ export const headerStyles = () => {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     width: 100%;
+    height: fit-content;
   `;
   const linkStyle = css`
     color: white;
