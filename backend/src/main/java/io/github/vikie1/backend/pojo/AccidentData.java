@@ -19,10 +19,10 @@ public class AccidentData {
     private String casualtiesDescription;
 
     public AccidentData(){}
-    public AccidentData(LocalDateTime time, String description, String cause, String causalVehicleType,
+    public AccidentData(String time, String description, String cause, String causalVehicleType,
                         String causalVehicleGroup, String type, int totalVehiclesInvolved, int totalCasualties,
                         int passengerCasualties, int passersByCasualties, int otherCasualties, String casualtiesDescription){
-        this.time = time;
+        this.time = LocalDateTime.parse(time);
         this.description = description;
         this.cause = cause;
         this.causalVehicleType = causalVehicleType;
@@ -73,8 +73,8 @@ public class AccidentData {
     public void setPassersByCasualties(int passersByCasualties) {
         this.passersByCasualties = passersByCasualties;
     }
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setTime(String time) {
+        this.time = LocalDateTime.parse(time);
     }
     public void setTotalCasualties(int totalCasualties) {
         this.totalCasualties = totalCasualties;
