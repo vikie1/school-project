@@ -1,4 +1,4 @@
-package com.example.accidenttracking.dto;
+package com.example.accidenttracking.pojo;
 
 import android.content.Context;
 
