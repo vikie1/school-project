@@ -1,7 +1,10 @@
 package com.example.accidenttracking.dto;
 
+import androidx.annotation.NonNull;
+
 import com.example.accidenttracking.pojo.AccidentData;
 import com.example.accidenttracking.pojo.CustomLocation;
+import com.google.gson.GsonBuilder;
 
 public class AccidentDto {
     private CustomLocation location;
@@ -52,5 +55,11 @@ public class AccidentDto {
     }
     public void setReporterName(String reporterName) {
         this.reporterName = reporterName;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return new GsonBuilder().create().toJson(this, AccidentDto.class);
     }
 }

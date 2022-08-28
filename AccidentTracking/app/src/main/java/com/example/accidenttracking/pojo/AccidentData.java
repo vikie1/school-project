@@ -1,5 +1,9 @@
 package com.example.accidenttracking.pojo;
 
+import androidx.annotation.NonNull;
+
+import com.google.gson.GsonBuilder;
+
 import java.time.LocalDateTime;
 
 public class AccidentData {
@@ -82,5 +86,11 @@ public class AccidentData {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return new GsonBuilder().create().toJson(this, AccidentData.class);
     }
 }

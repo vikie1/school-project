@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.accidenttracking.util.GoogleServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.GsonBuilder;
 
 import java.util.Objects;
 
@@ -100,15 +101,7 @@ public class CustomLocation {
     @NonNull
     @Override
     public String toString() {
-        return "Location{" +
-                "streetAddress='" + streetAddress + '\'' +
-                ", address='" + address + '\'' +
-                ", locality='" + locality + '\'' +
-                ", city='" + city + '\'' +
-                ", pinCode='" + pinCode + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                '}';
+        return new GsonBuilder().create().toJson(this, CustomLocation.class);
     }
     // for comparisons
     @Override
