@@ -12,4 +12,12 @@
     <string name="casualties">Casualties: passenger, passersby, other</string>
     <string name="current_loc">Are you at the scene now?</string>
     <string name="proceed">Proceed</string>
+    <string name="use_current_location">use current location</string>
+    <string name="or">or</string>
+    <string name="add_location">add location</string>
+    <string name="pin_code">area code(optional)</string>
+    <string name="city">county</string>
+    <string name="locality">locality or nearest town</string>
+    <string name="street_address">street name or nearest feature</string>
+    <string name="enter_location_manually">Enter location manually</string>
 </resources>

@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_add_new_accident.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/add_accident_first_step.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/add_accident_second_step.xml" value="0.1693840579710145" />
       </map>
     </option>
   </component>
