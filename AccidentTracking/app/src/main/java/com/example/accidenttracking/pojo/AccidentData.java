@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder;
 import java.time.LocalDateTime;
 
 public class AccidentData {
-    private LocalDateTime time;
+    private String time;
     private String description;
     private String cause;
     private String causalVehicleType;
@@ -24,7 +24,7 @@ public class AccidentData {
     public AccidentData(LocalDateTime time, String description, String cause, String causalVehicleType,
                         String causalVehicleGroup, String type, int totalVehiclesInvolved, int totalCasualties,
                         int passengerCasualties, int passersByCasualties, int otherCasualties, String casualtiesDescription){
-        this.time = time;
+        this.time = time.toString();
         this.description = description;
         this.cause = cause;
         this.causalVehicleType = causalVehicleType;
@@ -38,7 +38,7 @@ public class AccidentData {
         this.casualtiesDescription = casualtiesDescription;
     }
 
-    public LocalDateTime getTime(){return this.time;}
+    public String getTime(){return this.time;}
     public String getDescription(){return this.description;}
     public String getCause(){return this.cause;}
     public String getCausalVehicleType(){return this.causalVehicleType;}
@@ -76,7 +76,7 @@ public class AccidentData {
         this.passersByCasualties = passersByCasualties;
     }
     public void setTime(LocalDateTime time) {
-        this.time = time;
+        this.time = time.toString();
     }
     public void setTotalCasualties(int totalCasualties) {
         this.totalCasualties = totalCasualties;
