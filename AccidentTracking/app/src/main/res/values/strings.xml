@@ -20,4 +20,8 @@
     <string name="locality">locality or nearest town</string>
     <string name="street_address">street name or nearest feature</string>
     <string name="enter_location_manually">Enter location manually</string>
+    <string name="enter_brief_description">A brief description of the accident is welcome</string>
+    <string name="casualty_description">Provide a descpription of the casualties (optional)</string>
+    <string name="enter_date_of_accident">Enter date of accident</string>
+    <string name="accident_time">Enter time of accident (approximate accepted)</string>
 </resources>
