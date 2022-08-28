@@ -162,6 +162,7 @@ public class AddNewAccidentActivity extends AppCompatActivity implements Locatio
         accidentData.setPassengerCasualties(Integer.parseInt(Objects.requireNonNull(passengerCasualties.getText()).toString()));
         accidentData.setPassersByCasualties(Integer.parseInt(Objects.requireNonNull(passersbyCasualties.getText()).toString()));
         accidentData.setOtherCasualties(Integer.parseInt(Objects.requireNonNull(otherCasualties.getText()).toString()));
+        accidentData.setTotalCasualties(accidentData.getPassengerCasualties() + accidentData.getPassersByCasualties() + accidentData.getOtherCasualties());
     }
 
     private CustomLocation addLocationManually(){
