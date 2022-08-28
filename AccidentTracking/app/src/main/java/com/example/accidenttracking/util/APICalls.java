@@ -1,26 +1,24 @@
 package com.example.accidenttracking.util;
 
-import com.example.accidenttracking.constants.APIEndPoints;
-
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class APICalls {
     public static void httpPost(String jsonData, String endPoint){
-        try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(endPoint).openConnection();
-            connection.setDoOutput(true);
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
-
-            OutputStream outputStream = connection.getOutputStream();
-            byte[]  data = jsonData.getBytes(StandardCharsets.UTF_8);
-            outputStream.write(data, 0, data.length);
+        MediaType json = MediaType.parse("application/json; charset=utf-8");
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(json, jsonData);
+        Request request = new Request.Builder()
+                .url(endPoint)
+                .post(body)
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            if (response.body() != null) System.out.println(response.body().string());
         } catch (IOException e) {
             e.printStackTrace();
         }

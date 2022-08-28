@@ -124,9 +124,9 @@ public class AddNewAccidentActivity extends AppCompatActivity implements Locatio
         finalStepBtn.setOnClickListener(v -> {
             bundleAccidentReport(accidentLocation.get());
             sendAccidentToAPI();
-            Toast.makeText(this, "Accident Report Successful", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AddNewAccidentActivity.this, MainActivity.class));
-            finish();
+//            Toast.makeText(this, "Accident Report Successful", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(AddNewAccidentActivity.this, MainActivity.class));
+//            finish();
         });
     }
 

@@ -1,6 +1,5 @@
 package io.github.vikie1.backend.model;
 
-import io.github.vikie1.backend.model.analytics.ByTime;
 import io.github.vikie1.backend.pojo.AccidentData;
 import io.github.vikie1.backend.pojo.Location;
 
