@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Accident Tracking</string>
+    <string name="report_accident">Report Accident</string>
+    <string name="accident_type_with_example">Accident Type e.g. Head On Collision</string>
+    <string name="cause_with_example">Cause e.g. drunk driving, weather e.t.c</string>
+    <string name="causal_vehicle_with_example">Vehicle that caused e.g psv, truck, personal e.t.c</string>
+    <string name="causal_vehicle_group_with_owner">Enter group/sacco/owner e.g 4.N.T.E, school bus e.t.c</string>
+    <string name="number_of_vehicles_involved">Number of vehicles involved</string>
+    <string name="passenger_casualties">Passenger Casualties</string>
+    <string name="passersby_casualties">Passersby casualties</string>
+    <string name="other_casualties">Other Casualties</string>
+    <string name="casualties">Casualties: passenger, passersby, other</string>
+    <string name="current_loc">Are you at the scene now?</string>
+    <string name="proceed">Proceed</string>
 </resources>

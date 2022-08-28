@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/accident_type_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/accident_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:hint="@string/accident_type_with_example"
+            android:inputType="textAutoComplete|textAutoCorrect"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/accident_cause_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accident_type_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/accident_cause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:hint="@string/cause_with_example"
+            android:inputType="textAutoComplete|textAutoCorrect" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cause_vehicle_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accident_cause_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cause_vehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:hint="@string/causal_vehicle_with_example"
+            android:inputType="textAutoComplete|textAutoCorrect" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cause_vehicle_group_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cause_vehicle_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cause_vehicle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:hint="@string/causal_vehicle_group_with_owner"
+            android:inputType="textAutoComplete|textAutoCorrect" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vehicles_involved_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cause_vehicle_group_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vehicles_involved"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:hint="@string/number_of_vehicles_involved"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/casualties"
+        android:id="@+id/casualties_text"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vehicles_involved_layout"/>
+
+    <LinearLayout
+        android:id="@+id/casualties_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/casualties_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passenger_casualties"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/passenger_casualties"
+            android:inputType="number"
+            android:selectAllOnFocus="true" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passersby_casualties"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/passersby_casualties"
+            android:inputType="number"
+            android:selectAllOnFocus="true" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/other_casualties"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/other_casualties"
+            android:inputType="number"
+            android:selectAllOnFocus="true" />
+    </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_determiner"
+        android:text="@string/current_loc"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/casualties_layout"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_accident_step_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/proceed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location_determiner" />
+</androidx.constraintlayout.widget.ConstraintLayout>
