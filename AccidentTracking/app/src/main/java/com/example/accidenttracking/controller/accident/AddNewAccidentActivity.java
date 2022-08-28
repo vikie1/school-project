@@ -16,9 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.accidenttracking.MainActivity;
 import com.example.accidenttracking.R;
+import com.example.accidenttracking.constants.APIEndPoints;
 import com.example.accidenttracking.dto.AccidentDto;
 import com.example.accidenttracking.pojo.AccidentData;
 import com.example.accidenttracking.pojo.CustomLocation;
+import com.example.accidenttracking.util.APICalls;
 import com.example.accidenttracking.util.LocationUtils;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
@@ -240,7 +242,7 @@ public class AddNewAccidentActivity extends AppCompatActivity implements Locatio
     }
 
     private void sendAccidentToAPI() {
-        System.out.println(accidentDto);
+        new Thread(() -> APICalls.httpPost(accidentDto.toString(), APIEndPoints.SAVE_ACCIDENT)).start();
     }
 
     @Override
