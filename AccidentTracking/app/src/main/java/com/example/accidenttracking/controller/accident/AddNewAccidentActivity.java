@@ -57,6 +57,8 @@ public class AddNewAccidentActivity extends AppCompatActivity {
         MaterialButton stepOneBtn = findViewById(R.id.add_accident_step_1);
         MaterialButton useCurrentLocation = findViewById(R.id.use_current);
         MaterialButton addLocation = findViewById(R.id.add_location);
+        MaterialButton otherDetails = findViewById(R.id.add_accident_step_3);
+        MaterialButton finalStepBtn = findViewById(R.id.add_accident_final_step);
 
         stepOneBtn.setOnClickListener(v -> {
             if (atScene.isChecked()) viewFlipper.setDisplayedChild(2);
@@ -64,6 +66,7 @@ public class AddNewAccidentActivity extends AppCompatActivity {
         });
         useCurrentLocation.setOnClickListener(v -> viewFlipper.setDisplayedChild(2));
         addLocation.setOnClickListener(v -> viewFlipper.setDisplayedChild(2));
+        otherDetails.setOnClickListener(v -> viewFlipper.setDisplayedChild(3));
     }
 
     @Override

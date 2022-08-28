@@ -31,6 +31,7 @@
         <include layout="@layout/add_accident_first_step" />
         <include layout="@layout/add_accident_second_step" />
         <include layout="@layout/add_accident_third_step" />
+        <include layout="@layout/add_accident_final_step" />
 
     </ViewFlipper>
 </androidx.constraintlayout.widget.ConstraintLayout>

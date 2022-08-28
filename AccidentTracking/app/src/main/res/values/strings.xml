@@ -21,7 +21,12 @@
     <string name="street_address">street name or nearest feature</string>
     <string name="enter_location_manually">Enter location manually</string>
     <string name="enter_brief_description">A brief description of the accident is welcome</string>
-    <string name="casualty_description">Provide a descpription of the casualties (optional)</string>
+    <string name="casualty_description">Provide a description of the casualties (optional)</string>
     <string name="enter_date_of_accident">Enter date of accident</string>
     <string name="accident_time">Enter time of accident (approximate accepted)</string>
+    <string name="provide_contact_details">Provide your contact details for follow up</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="finish">Finish</string>
 </resources>
