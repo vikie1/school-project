@@ -3,6 +3,7 @@ package io.github.vikie1.backend.service;
 import io.github.vikie1.backend.model.AccidentModel;
 import io.github.vikie1.backend.repository.AccidentsRepository;
 import io.github.vikie1.backend.service.analytics.ByAccidentTime;
+import io.github.vikie1.backend.service.analytics.ByVehicleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,14 @@ public class AccidentsService {
     AccidentsRepository accidentsRepository;
     @Autowired
     ByAccidentTime byAccidentTime;
+    @Autowired
+    ByVehicleTypeService byVehicleTypeService;
 
     // CREATE
     public void add(AccidentModel accidentModel) {
         accidentsRepository.save(accidentModel);
         byAccidentTime.update(accidentModel);
+        byVehicleTypeService.update(accidentModel);
     }
 
     // READ
@@ -44,6 +48,7 @@ public class AccidentsService {
     // DELETE
     public void delete(long id) {
         byAccidentTime.deduct(get(id));
+        byVehicleTypeService.deduct(get(id));
         accidentsRepository.deleteById(id);
     }
 }
