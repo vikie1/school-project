@@ -35,6 +35,7 @@ public class ByAccidentTime {
         byTimeRepository.save(statToUpdate);
     }
 
+    @Async
     public void deduct(AccidentModel accidentModel){
         if (accidentModel == null) return;
         String timeSlot = TimeUtils.getTimeSlot(accidentModel.getAccidentData().getTime().toLocalTime());
