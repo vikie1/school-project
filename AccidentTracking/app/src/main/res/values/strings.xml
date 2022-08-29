@@ -34,4 +34,8 @@
     <string name="total_casualties_reported">Total Casualties Reported</string>
     <string name="accidents_reported_today">Accidents Reported today</string>
     <string name="total_casualties_reported_today">Total casualties reported today</string>
+    <string name="_0">0</string>
+    <string name="home">Home</string>
+    <string name="stats">Analytics</string>
+    <string name="report">Report</string>
 </resources>

@@ -72,7 +72,7 @@
                         android:gravity="center"
                         android:background="@drawable/blue_circle"
                         android:padding="10dp"
-                        android:text="13"
+                        android:text="@string/_0"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <Space
@@ -114,7 +114,7 @@
                         android:gravity="center"
                         android:padding="10dp"
                         android:background="@drawable/pink_circle"
-                        android:text="4"
+                        android:text="@string/_0"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <Space
@@ -157,7 +157,7 @@
                         android:gravity="center"
                         android:padding="10dp"
                         android:background="@drawable/green_circle"
-                        android:text="2"
+                        android:text="@string/_0"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <Space
@@ -200,7 +200,7 @@
                         android:gravity="center"
                         android:padding="10dp"
                         android:background="@drawable/greyish_circle"
-                        android:text="1"
+                        android:text="@string/_0"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <Space

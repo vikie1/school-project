@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.accidenttracking.controller.accident.AddNewAccidentActivity;
+import com.example.accidenttracking.controller.common.BottomNav;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        BottomNav.init(getWindow().getDecorView().getRootView(), this);
     }
 }
