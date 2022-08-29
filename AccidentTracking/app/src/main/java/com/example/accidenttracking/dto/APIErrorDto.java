@@ -1,25 +1,25 @@
 package com.example.accidenttracking.dto;
 
 public class APIErrorDto {
-    private String HTTPStatus;
+    private String status;
     private String reason;
     private String errorMessage;
     private int statusCode;
 
     public APIErrorDto(){}
     public APIErrorDto(String HTTPStatus, String reason, String errorMessage, int statusCode) {
-        this.HTTPStatus = HTTPStatus;
+        this.status = HTTPStatus;
         this.reason = reason;
         this.errorMessage = errorMessage;
         this.statusCode = statusCode;
     }
 
-    public String getHTTPStatus() {
-        return HTTPStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setHTTPStatus(String HTTPStatus) {
-        this.HTTPStatus = HTTPStatus;
+    public void setStatus(String HTTPStatus) {
+        this.status = HTTPStatus;
     }
 
     public String getReason() {

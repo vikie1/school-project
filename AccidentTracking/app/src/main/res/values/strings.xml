@@ -38,4 +38,5 @@
     <string name="home">Home</string>
     <string name="stats">Analytics</string>
     <string name="report">Report</string>
+    <string name="latest_records">Latest Records</string>
 </resources>

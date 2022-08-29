@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -34,12 +33,14 @@ public class APICalls {
     }
     public static Map<Integer, String> httpGet(String endpoint, String arguments){
         Map<Integer, String> apiResponse = new HashMap<>(); // int for the response code and string for the response payload
-        HttpsURLConnection apiConnection;
+        HttpURLConnection apiConnection;
 
         try {
             // get api data
-            apiConnection = (HttpsURLConnection) new URL(endpoint + (arguments != null && arguments.trim().isEmpty() ? arguments : "")).openConnection();
-            InputStream responseBody = apiConnection.getInputStream();
+            apiConnection = (HttpURLConnection) new URL(endpoint + (arguments != null && arguments.trim().isEmpty() ? arguments : "")).openConnection();
+            InputStream responseBody;
+            if (apiConnection.getResponseCode() == 200) responseBody = apiConnection.getInputStream();
+            else responseBody = apiConnection.getErrorStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(responseBody, StandardCharsets.UTF_8)); // make response body a readable json
 
             // create a string containing api data
