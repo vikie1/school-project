@@ -147,11 +147,13 @@ public class DistributionFragment extends Fragment implements LocationUtils.Loca
                     for (String key : accidentData.keySet()){
                         for (AccidentDto accidentDto: Objects.requireNonNull(accidentData.get(key))){
                             if (accidentDto != null){
-                                createMarkers(
-                                        googleMap,
-                                        accidentDto.getLocation().getLatitude(),
-                                        accidentDto.getLocation().getLongitude(),
-                                        accidentDto.getAccidentData().getType()
+                                requireActivity().runOnUiThread(() ->
+                                        createMarkers(
+                                                googleMap,
+                                                accidentDto.getLocation().getLatitude(),
+                                                accidentDto.getLocation().getLongitude(),
+                                                accidentDto.getAccidentData().getType()
+                                        )
                                 );
                             }
                         }

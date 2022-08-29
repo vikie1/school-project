@@ -40,7 +40,6 @@ public class TimeChartFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_time_chart, container, false);
 
         barEntries = new ArrayList<>();
-        setUpChats();
 
         Handler handler = new Handler();
         Runnable runnableThread = new Runnable() {
@@ -63,6 +62,7 @@ public class TimeChartFragment extends Fragment {
             if (apiResponse.containsKey(200)) {
                 Type mapType = new TypeToken<Map<String, List<TimeStatsDto>>>() {}.getType();
                 timeStatsResponse = new Gson().fromJson(apiResponse.get(200), mapType);
+                System.out.println(apiResponse.get(200));
                 if (timeStatsResponse != null) {
                     for (String key : timeStatsResponse.keySet()) {
                         requireActivity().runOnUiThread(() -> addBarEntries(timeStatsResponse.get(key)));
@@ -78,7 +78,7 @@ public class TimeChartFragment extends Fragment {
                     });
                 }
             }
-        });
+        }).start();
     }
 
     private void setUpChats() {
@@ -102,5 +102,7 @@ public class TimeChartFragment extends Fragment {
             // entry and passing x and y axis value to it.
             barEntries.add(new BarEntry(i, timeStatsDtos.get(i).getTotalAccidents()));
         }
+
+        setUpChats();
     }
 }

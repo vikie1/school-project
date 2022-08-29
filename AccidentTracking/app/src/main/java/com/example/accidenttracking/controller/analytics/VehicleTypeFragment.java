@@ -41,7 +41,6 @@ public class VehicleTypeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_vehicle_type, container, false);
 
         barEntries = new ArrayList<>();
-        setUpChats();
 
         Handler handler = new Handler();
         Runnable runnableThread = new Runnable() {
@@ -104,5 +103,7 @@ public class VehicleTypeFragment extends Fragment {
             // entry and passing x and y axis value to it.
             barEntries.add(new BarEntry(i, vehicleTypeStatsDtos.get(i).getTotalAccidents()));
         }
+
+        setUpChats();
     }
 }
