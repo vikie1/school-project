@@ -68,4 +68,16 @@ public class AccidentModel {
     public void setReporterName(String reporterName) {
         this.reporterName = reporterName;
     }
+
+    @Override
+    public String toString() {
+        return "AccidentModel{" +
+                "id=" + id +
+                ", location=" + location +
+                ", accidentData=" + accidentData +
+                ", reporterName='" + reporterName + '\'' +
+                ", reporterEmail='" + reporterEmail + '\'' +
+                ", reporterContact='" + reporterContact + '\'' +
+                '}';
+    }
 }

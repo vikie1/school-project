@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @RestController @RequestMapping("/api/accidents")
 public class AccidentsAPI {
@@ -66,11 +65,6 @@ public class AccidentsAPI {
     @RequestMapping(method = RequestMethod.POST) @PostMapping("/")
     public void create(@RequestBody AccidentModel accidentModel){
          accidentsService.add(accidentModel);
-         Logger logger = Logger.getLogger(getClass().toString());
-         logger.info("Received");
-         System.out.println("Received");
-         logger.info(accidentModel.toString());
-         System.out.println(accidentModel);
     }
 
     //PUT

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service @EnableAsync
 public class ByAccidentTime {
@@ -22,6 +23,7 @@ public class ByAccidentTime {
     @Async
     public void update(AccidentModel accidentModel){
         if (accidentModel == null) return;
+
         String timeSlot = TimeUtils.getTimeSlot(accidentModel.getAccidentData().getTime().toLocalTime());
         ByTime statToUpdate;
 

@@ -14,14 +14,15 @@ public class TimeUtils {
      */
     public static String getTimeSlot(LocalTime time){
         for (StatisticalClasses.TimeIntervals timeSlot: StatisticalClasses.TimeIntervals.values()){
-            String[] specificTimeSlot = timeSlot.name().split(" - ");
+
+            String[] specificTimeSlot = timeSlot.getValue().split(" - ");
             LocalTime startOfTimeSlot = LocalTime.parse(specificTimeSlot[0]);
             LocalTime endOfTimeSlot = LocalTime.parse(specificTimeSlot[1]);
 
             if (time.equals(startOfTimeSlot)
                     || time.equals(endOfTimeSlot)
                     || (time.isAfter(startOfTimeSlot) && time.isBefore(endOfTimeSlot))){
-                return timeSlot.name();
+                return timeSlot.getValue();
             }
         }
         throw new IllegalArgumentException("The timeslot provided doesn't fit any given slot or there was an error while processing the time");
