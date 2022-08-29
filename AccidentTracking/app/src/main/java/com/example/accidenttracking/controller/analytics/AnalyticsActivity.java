@@ -39,7 +39,7 @@ public class AnalyticsActivity extends AppCompatActivity {
                             tab.setText("Time");
                             break;
                         case 1:
-                            tab.setText("Car");
+                            tab.setText("Vehicle");
                             break;
                         case 2:
                             tab.setText("Distribution");

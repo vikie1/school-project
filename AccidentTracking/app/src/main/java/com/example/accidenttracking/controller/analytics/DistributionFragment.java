@@ -2,22 +2,45 @@ package com.example.accidenttracking.controller.analytics;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.accidenttracking.R;
+import com.example.accidenttracking.util.LocationUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class DistributionFragment extends Fragment {
+public class DistributionFragment extends Fragment implements LocationUtils.LocationPermissionResult {
+    private LatLng latLng;
+    private LocationUtils locationUtils;
+
+    private GoogleMap googleMap;
+    private Marker currentLocationMarker;
+    private Context context;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+        locationUtils = new LocationUtils(DistributionFragment.this, context, DistributionFragment.this);
+    }
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -32,9 +55,10 @@ public class DistributionFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            DistributionFragment.this.googleMap = googleMap;
+            latLng = locationUtils.getLatLng();
+
+            if (latLng != null) createMarkerForCurrentLoc();
         }
     };
 
@@ -54,5 +78,47 @@ public class DistributionFragment extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+    }
+
+    public void createMarkerForCurrentLoc(){
+        if(googleMap != null) {
+            if (currentLocationMarker != null) currentLocationMarker.remove();
+            currentLocationMarker = googleMap.addMarker(new MarkerOptions().position(latLng).title("Current location"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 6));
+        }
+    }
+
+    private void createMarkers(GoogleMap googleMap, double latitude, double longitude, String title){
+        LatLng currentLocation = new LatLng(latitude, longitude);
+        googleMap.addMarker(
+                new MarkerOptions()
+                        .position(currentLocation)
+                        .title(title)
+                        .icon(
+                                bitmapDescriptorFromVector(context, R.drawable.ic_baseline_report_problem_24)
+                        )
+        );
+    }
+
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        if (vectorDrawable == null) return null;
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    @Override
+    public void onPermissionGranted(LatLng latLng) {
+        this.latLng = latLng;
+
+        createMarkerForCurrentLoc();
+    }
+
+    @Override
+    public void onPermissionDeclined() {
+        Toast.makeText(context, "App won't function optimum without location permission", Toast.LENGTH_LONG).show();
     }
 }
