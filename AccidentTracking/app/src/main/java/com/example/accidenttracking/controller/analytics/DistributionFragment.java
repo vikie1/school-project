@@ -10,12 +10,17 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.accidenttracking.R;
+import com.example.accidenttracking.constants.APIEndPoints;
+import com.example.accidenttracking.dto.APIErrorDto;
+import com.example.accidenttracking.dto.AccidentDto;
+import com.example.accidenttracking.util.APICalls;
 import com.example.accidenttracking.util.LocationUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,6 +31,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class DistributionFragment extends Fragment implements LocationUtils.LocationPermissionResult {
     private LatLng latLng;
@@ -59,6 +73,16 @@ public class DistributionFragment extends Fragment implements LocationUtils.Loca
             latLng = locationUtils.getLatLng();
 
             if (latLng != null) createMarkerForCurrentLoc();
+
+            Handler handler = new Handler();
+            Runnable runnableThread = new Runnable() {
+                @Override
+                public void run() {
+                    getRecords();
+                    handler.postDelayed(this, 5000); //wait 4 sec and run again
+                }
+            };
+            runnableThread.run();
         }
     };
 
@@ -108,6 +132,39 @@ public class DistributionFragment extends Fragment implements LocationUtils.Loca
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    private void getRecords() {
+        new Thread(() -> {
+            Map<Integer, String> apiResponse = APICalls.httpGet(APIEndPoints.GET_ACCIDENT, "");
+            APIErrorDto apiErrorDto;
+            Map<String, List<AccidentDto>> accidentData;
+
+            if (apiResponse.containsKey(200)){
+                Type mapType = new TypeToken<Map<String, List<AccidentDto>>>() {}.getType();
+                accidentData = new Gson().fromJson(apiResponse.get(200), mapType);
+                if (accidentData != null) {
+                    for (String key : accidentData.keySet()){
+                        for (AccidentDto accidentDto: Objects.requireNonNull(accidentData.get(key))){
+                            if (accidentDto != null){
+                                createMarkers(
+                                        googleMap,
+                                        accidentDto.getLocation().getLatitude(),
+                                        accidentDto.getLocation().getLongitude(),
+                                        accidentDto.getAccidentData().getType()
+                                );
+                            }
+                        }
+                    }
+                }
+            } else {
+                for (int errorResponse : apiResponse.keySet()) {
+                    apiErrorDto = new Gson().fromJson(apiResponse.get(errorResponse), APIErrorDto.class);
+                    APIErrorDto finalApiErrorDto = apiErrorDto;
+                    Toast.makeText(context, finalApiErrorDto.getStatusCode() + finalApiErrorDto.getReason(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).start();
     }
 
     @Override
