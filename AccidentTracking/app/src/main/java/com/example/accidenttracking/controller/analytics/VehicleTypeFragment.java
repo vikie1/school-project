@@ -16,9 +16,11 @@ import com.example.accidenttracking.dto.APIErrorDto;
 import com.example.accidenttracking.dto.VehicleTypeStatsDto;
 import com.example.accidenttracking.util.APICalls;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,7 +33,8 @@ import java.util.List;
 import java.util.Map;
 
 public class VehicleTypeFragment extends Fragment {
-    List<BarEntry> barEntries;
+    private List<BarEntry> barEntries;
+    private List<VehicleTypeStatsDto> vehicleTypeStatsDtos;
 
     private View view;
 
@@ -66,7 +69,8 @@ public class VehicleTypeFragment extends Fragment {
 
                 if (carStatsResponse != null){
                     for (String key : carStatsResponse.keySet()){
-                        requireActivity().runOnUiThread(() -> addBarEntries(carStatsResponse.get(key)));
+                        vehicleTypeStatsDtos = carStatsResponse.get(key);
+                        requireActivity().runOnUiThread(this::addBarEntries);
                     }
                 }
             } else {
@@ -93,9 +97,17 @@ public class VehicleTypeFragment extends Fragment {
 
         barDataSet.setValueTextSize(16f);
         barChart.getDescription().setEnabled(false);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return vehicleTypeStatsDtos.get((int) value).getCarType();
+            }
+        });
     }
 
-    private void addBarEntries(List<VehicleTypeStatsDto> vehicleTypeStatsDtos) {
+    private void addBarEntries() {
         if (vehicleTypeStatsDtos == null || vehicleTypeStatsDtos.isEmpty()) return;
 
         for (int i = 0; i < vehicleTypeStatsDtos.size(); i++){

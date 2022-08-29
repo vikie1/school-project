@@ -15,9 +15,11 @@ import com.example.accidenttracking.dto.APIErrorDto;
 import com.example.accidenttracking.dto.TimeStatsDto;
 import com.example.accidenttracking.util.APICalls;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,6 +33,7 @@ import java.util.Map;
 
 public class TimeChartFragment extends Fragment {
     List<BarEntry> barEntries;
+    List<TimeStatsDto> timeStatsDtos;
 
     private View view;
 
@@ -65,7 +68,8 @@ public class TimeChartFragment extends Fragment {
                 System.out.println(apiResponse.get(200));
                 if (timeStatsResponse != null) {
                     for (String key : timeStatsResponse.keySet()) {
-                        requireActivity().runOnUiThread(() -> addBarEntries(timeStatsResponse.get(key)));
+                        timeStatsDtos = timeStatsResponse.get(key);
+                        requireActivity().runOnUiThread(this::addBarEntries);
                     }
                 }
             } else {
@@ -92,9 +96,17 @@ public class TimeChartFragment extends Fragment {
 
         barDataSet.setValueTextSize(16f);
         barChart.getDescription().setEnabled(false);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return timeStatsDtos.get((int) value).getTimeSlot();
+            }
+        });
     }
 
-    private void addBarEntries(List<TimeStatsDto> timeStatsDtos) {
+    private void addBarEntries() {
         if (timeStatsDtos == null || timeStatsDtos.isEmpty()) return;
 
         for (int i = 0; i < timeStatsDtos.size(); i++) {
