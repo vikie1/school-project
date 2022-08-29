@@ -8,7 +8,7 @@ public class StatisticalClasses {
         EVENING("16:00 - 18:59"),
         EARLY_NIGHT("19:00 - 21:59"),
         LATE_NIGHT("22:00 - 00:59"),
-        WEE_HOURS("01:00am - 03:59am");
+        WEE_HOURS("01:00 - 03:59");
 
         private final String value;
         private TimeIntervals(String s) {

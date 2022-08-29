@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNav.init(getWindow().getDecorView().getRootView(), this);
 
-
         Handler handler = new Handler();
         Runnable runnableThread = new Runnable() {
             @Override

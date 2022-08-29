@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.accidenttracking.MainActivity;
 import com.example.accidenttracking.R;
 import com.example.accidenttracking.controller.accident.AddNewAccidentActivity;
+import com.example.accidenttracking.controller.analytics.AnalyticsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNav {
@@ -23,9 +24,8 @@ public class BottomNav {
                         if (context instanceof MainActivity) return false;
                         intent = new Intent(context, MainActivity.class);
                     } else if(item.getItemId() == R.id.analytics){
-                        if (context instanceof MainActivity) return false;
-                        intent = new Intent(context, MainActivity.class);
-                        Toast.makeText(context, "Okay still progress", Toast.LENGTH_SHORT).show();
+                        if (context instanceof AnalyticsActivity) return false;
+                        intent = new Intent(context, AnalyticsActivity.class);
                     } else if (item.getItemId() == R.id.report){
                         intent = new Intent(context, AddNewAccidentActivity.class);
                     } else {

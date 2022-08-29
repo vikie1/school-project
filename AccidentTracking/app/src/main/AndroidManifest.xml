@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AccidentTracking"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".controller.analytics.AnalyticsActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.accident.AddNewAccidentActivity"
             android:exported="false" />
         <activity
