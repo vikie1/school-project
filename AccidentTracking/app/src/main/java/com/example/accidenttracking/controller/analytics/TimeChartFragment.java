@@ -56,7 +56,7 @@ public class TimeChartFragment extends Fragment {
 
     private void getRecords() {
         new Thread(() -> {
-            Map<Integer, String> apiResponse = APICalls.httpGet(APIEndPoints.GET_ACCIDENT, "");
+            Map<Integer, String> apiResponse = APICalls.httpGet(APIEndPoints.GET_TIME, "");
             APIErrorDto apiErrorDto;
             Map<String, List<TimeStatsDto>> timeStatsResponse;
 
@@ -95,7 +95,7 @@ public class TimeChartFragment extends Fragment {
     }
 
     private void addBarEntries(List<TimeStatsDto> timeStatsDtos) {
-        if (timeStatsDtos == null || timeStatsDtos.size() == 0) return;
+        if (timeStatsDtos == null || timeStatsDtos.isEmpty()) return;
 
         for (int i = 0; i < timeStatsDtos.size(); i++) {
             // adding new entry to our array list with bar

@@ -5,19 +5,30 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.accidenttracking.R;
+import com.example.accidenttracking.constants.APIEndPoints;
+import com.example.accidenttracking.dto.APIErrorDto;
+import com.example.accidenttracking.dto.VehicleTypeStatsDto;
+import com.example.accidenttracking.util.APICalls;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VehicleTypeFragment extends Fragment {
     List<BarEntry> barEntries;
@@ -30,9 +41,46 @@ public class VehicleTypeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_vehicle_type, container, false);
 
         barEntries = new ArrayList<>();
-        addBarEntries();
         setUpChats();
+
+        Handler handler = new Handler();
+        Runnable runnableThread = new Runnable() {
+            @Override
+            public void run() {
+                getRecords();
+                handler.postDelayed(this, 5000); //wait 4 sec and run again
+            }
+        };
+        runnableThread.run();
         return view;
+    }
+
+    private void getRecords() {
+        new Thread(() -> {
+            Map<Integer, String> apiResponse = APICalls.httpGet(APIEndPoints.GET_CAR_TYPE, "");
+            APIErrorDto apiErrorDto;
+            Map<String, List<VehicleTypeStatsDto>> carStatsResponse;
+
+            if (apiResponse.containsKey(200)){
+                Type mapType = new TypeToken<Map<String, List<VehicleTypeStatsDto>>>(){}.getType();
+                carStatsResponse = new Gson().fromJson(apiResponse.get(200), mapType);
+
+                if (carStatsResponse != null){
+                    for (String key : carStatsResponse.keySet()){
+                        requireActivity().runOnUiThread(() -> addBarEntries(carStatsResponse.get(key)));
+                    }
+                }
+            } else {
+                for (int errorResponse : apiResponse.keySet()) {
+                    apiErrorDto = new Gson().fromJson(apiResponse.get(errorResponse), APIErrorDto.class);
+                    APIErrorDto finalApiErrorDto = apiErrorDto;
+                    requireActivity().runOnUiThread(() -> {
+                        CharSequence text = finalApiErrorDto.getStatusCode() + finalApiErrorDto.getReason();
+                        Snackbar.make(view, text, BaseTransientBottomBar.LENGTH_LONG).show();
+                    });
+                }
+            }
+        }).start();
     }
 
     private void setUpChats() {
@@ -48,10 +96,13 @@ public class VehicleTypeFragment extends Fragment {
         barChart.getDescription().setEnabled(false);
     }
 
-    private void addBarEntries() {
-        barEntries.add(new BarEntry(1f, 4));
-        barEntries.add(new BarEntry(2f, 6));
-        barEntries.add(new BarEntry(3f, 2));
-        barEntries.add(new BarEntry(4f, 3));
+    private void addBarEntries(List<VehicleTypeStatsDto> vehicleTypeStatsDtos) {
+        if (vehicleTypeStatsDtos == null || vehicleTypeStatsDtos.isEmpty()) return;
+
+        for (int i = 0; i < vehicleTypeStatsDtos.size(); i++){
+            // adding new entry to our array list with bar
+            // entry and passing x and y axis value to it.
+            barEntries.add(new BarEntry(i, vehicleTypeStatsDtos.get(i).getTotalAccidents()));
+        }
     }
 }

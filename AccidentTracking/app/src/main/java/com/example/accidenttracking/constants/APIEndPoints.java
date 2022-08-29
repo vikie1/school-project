@@ -5,4 +5,5 @@ public class APIEndPoints {
     public static final String SAVE_ACCIDENT = IP_ADDRESS + "/api/accidents/";
     public static final String GET_ACCIDENT = IP_ADDRESS + "/api/accidents/";
     public static final String GET_TIME = IP_ADDRESS + "/api/analytics/time";
+    public static final String GET_CAR_TYPE = IP_ADDRESS + "/api/analytics/car";
 }
