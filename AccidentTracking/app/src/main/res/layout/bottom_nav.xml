@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/cardview_dark_background"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/main_bottom_nav_menu" />

@@ -1,15 +1,14 @@
 package com.example.accidenttracking.controller.analytics;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.os.Bundle;
 
 import com.example.accidenttracking.R;
 import com.example.accidenttracking.controller.common.BottomNav;
@@ -40,12 +39,9 @@ public class AnalyticsActivity extends AppCompatActivity {
                             tab.setText("Time");
                             break;
                         case 1:
-                            tab.setText("Area");
+                            tab.setText("Car");
                             break;
                         case 2:
-                            tab.setText("Vehicles");
-                            break;
-                        case 3:
                             tab.setText("Distribution");
                             break;
                     }
@@ -67,10 +63,8 @@ public class AnalyticsActivity extends AppCompatActivity {
                 case 0:
                     return new TimeChartFragment();
                 case 1:
-                    return new AreaFragment();
-                case 2:
                     return new VehicleTypeFragment();
-                case 3:
+                case 2:
                     return new DistributionFragment();
             }
             return new TimeChartFragment();
@@ -78,7 +72,7 @@ public class AnalyticsActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 4;
+            return 3;
         }
     }
 }
