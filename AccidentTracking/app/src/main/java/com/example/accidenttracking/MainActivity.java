@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
             APIErrorDto apiErrorDto;
             Map<String, List<AccidentDto>> accidentData;
             if (apiResponse.containsKey(200)) {
-                Type mapType = new TypeToken<Map<String, List<AccidentDto>>>() {
-                }.getType();
+                Type mapType = new TypeToken<Map<String, List<AccidentDto>>>() {}.getType();
                 accidentData = new Gson().fromJson(apiResponse.get(200), mapType);
                 if (accidentData != null) {
                     for (String key : accidentData.keySet()) {
