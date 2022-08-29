@@ -95,6 +95,8 @@ public class TimeChartFragment extends Fragment {
     }
 
     private void addBarEntries(List<TimeStatsDto> timeStatsDtos) {
+        if (timeStatsDtos == null || timeStatsDtos.size() == 0) return;
+
         for (int i = 0; i < timeStatsDtos.size(); i++) {
             // adding new entry to our array list with bar
             // entry and passing x and y axis value to it.

@@ -40,23 +40,29 @@
             android:inputType="textAutoComplete|textAutoCorrect" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:id="@+id/cause_vehicle_layout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/accident_cause_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cause_vehicle"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/cause_vehicle_label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:selectAllOnFocus="true"
-            android:hint="@string/causal_vehicle_with_example"
-            android:inputType="textAutoComplete|textAutoCorrect" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:labelFor="@id/cause_vehicle"
+            android:text="@string/causal_vehicle_with_example" />
+
+        <Spinner
+            android:id="@+id/cause_vehicle"
+            android:background="@drawable/gradient_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cause_vehicle_group_layout"

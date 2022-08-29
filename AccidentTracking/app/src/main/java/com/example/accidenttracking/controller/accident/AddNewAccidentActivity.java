@@ -7,7 +7,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.accidenttracking.MainActivity;
 import com.example.accidenttracking.R;
 import com.example.accidenttracking.constants.APIEndPoints;
+import com.example.accidenttracking.constants.SpinnerData;
 import com.example.accidenttracking.dto.AccidentDto;
 import com.example.accidenttracking.pojo.AccidentData;
 import com.example.accidenttracking.pojo.CustomLocation;
@@ -37,7 +40,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -57,6 +63,12 @@ public class AddNewAccidentActivity extends AppCompatActivity implements Locatio
         setContentView(R.layout.activity_add_new_accident);
 
         viewFlipper = findViewById(R.id.accident_progress);
+
+        // populate spinner
+        Spinner causalVehicle = findViewById(R.id.cause_vehicle);
+        List<String> spinnerEntries = new ArrayList<>(Arrays.asList(SpinnerData.carTypes));
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerEntries);
+        causalVehicle.setAdapter(spinnerAdapter);
 
         accidentData = new AccidentData();
 
@@ -147,7 +159,7 @@ public class AddNewAccidentActivity extends AppCompatActivity implements Locatio
     private void fillStepOneDetails(){
         TextInputEditText accidentType = findViewById(R.id.accident_type);
         TextInputEditText accidentCause = findViewById(R.id.accident_cause);
-        TextInputEditText causalVehicle = findViewById(R.id.cause_vehicle);
+        Spinner causalVehicle = findViewById(R.id.cause_vehicle);
         TextInputEditText causeVehicleGroup = findViewById(R.id.cause_vehicle_group);
         TextInputEditText vehiclesInvolved = findViewById(R.id.vehicles_involved);
         TextInputEditText passengerCasualties = findViewById(R.id.passenger_casualties);
@@ -156,7 +168,7 @@ public class AddNewAccidentActivity extends AppCompatActivity implements Locatio
 
         accidentData.setCause(Objects.requireNonNull(accidentCause.getText()).toString());
         accidentData.setType(Objects.requireNonNull(accidentType.getText()).toString());
-        accidentData.setCausalVehicleType(Objects.requireNonNull(causalVehicle.getText()).toString());
+        accidentData.setCausalVehicleType(String.valueOf(causalVehicle.getSelectedItem()));
         accidentData.setCausalVehicleGroup(Objects.requireNonNull(causeVehicleGroup.getText()).toString());
         accidentData.setTotalVehiclesInvolved(Integer.parseInt(Objects.requireNonNull(vehiclesInvolved.getText()).toString()));
         accidentData.setPassengerCasualties(Integer.parseInt(Objects.requireNonNull(passengerCasualties.getText()).toString()));

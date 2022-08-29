@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/blue_circle.xml" value="0.194" />
+        <entry key="app/src/main/res/drawable-v24/gradient_spinner.xml" value="0.194" />
         <entry key="app/src/main/res/drawable-v24/green_circle.xml" value="0.194" />
         <entry key="app/src/main/res/drawable-v24/greyish_circle.xml" value="0.194" />
         <entry key="app/src/main/res/drawable-v24/pink_circle.xml" value="0.194" />
