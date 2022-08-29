@@ -1,6 +1,15 @@
 package com.example.accidenttracking.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -22,5 +31,33 @@ public class APICalls {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static Map<Integer, String> httpGet(String endpoint, String arguments){
+        Map<Integer, String> apiResponse = new HashMap<>(); // int for the response code and string for the response payload
+        HttpsURLConnection apiConnection;
+
+        try {
+            // get api data
+            apiConnection = (HttpsURLConnection) new URL(endpoint + (arguments != null && arguments.trim().isEmpty() ? arguments : "")).openConnection();
+            InputStream responseBody = apiConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(responseBody, StandardCharsets.UTF_8)); // make response body a readable json
+
+            // create a string containing api data
+            StringBuilder stringBuilder = new StringBuilder();
+            String currentLine;
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                stringBuilder.append(currentLine);
+            }
+
+            // package response data
+            apiResponse.put(apiConnection.getResponseCode(), stringBuilder.toString());
+
+            // close the connection
+            responseBody.close();
+            bufferedReader.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return apiResponse;
     }
 }
