@@ -31,7 +31,7 @@ export const HomePage = (props) => {
             <p css={css`padding-top: 1rem;`}>
               This website collects accidents occurence in real time and and
               stores the data in a central database. The data is then clustered
-              according to location and time of occurence. We then use analyse
+              according to location and time of occurence. We then analyse
               this data and visualise it for consumption by the web users.
             </p>
             <div css={buttonWrapper}>
