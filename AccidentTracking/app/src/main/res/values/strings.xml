@@ -29,4 +29,9 @@
     <string name="email_address">Email Address</string>
     <string name="phone_number">Phone number</string>
     <string name="finish">Finish</string>
+    <string name="quick_statistics">Quick Statistics</string>
+    <string name="total_accidents_reported">Total Accidents Reported</string>
+    <string name="total_casualties_reported">Total Casualties Reported</string>
+    <string name="accidents_reported_today">Accidents Reported today</string>
+    <string name="total_casualties_reported_today">Total casualties reported today</string>
 </resources>
