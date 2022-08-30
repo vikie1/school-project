@@ -16,8 +16,8 @@ public class CustomLocation {
     private String locality;
     private String city;
     private String pinCode;
-    private Double longitude;
-    private Double latitude;
+    private double longitude;
+    private double latitude;
 
     public CustomLocation(){}
     public CustomLocation(String address, Double longitude, Double latitude) {

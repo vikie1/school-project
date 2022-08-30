@@ -21,6 +21,7 @@ import com.example.accidenttracking.constants.APIEndPoints;
 import com.example.accidenttracking.dto.APIErrorDto;
 import com.example.accidenttracking.dto.AccidentDto;
 import com.example.accidenttracking.util.APICalls;
+import com.example.accidenttracking.util.GoogleServices;
 import com.example.accidenttracking.util.LocationUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -147,14 +148,28 @@ public class DistributionFragment extends Fragment implements LocationUtils.Loca
                     for (String key : accidentData.keySet()){
                         for (AccidentDto accidentDto: Objects.requireNonNull(accidentData.get(key))){
                             if (accidentDto != null){
-                                requireActivity().runOnUiThread(() ->
-                                        createMarkers(
-                                                googleMap,
-                                                accidentDto.getLocation().getLatitude(),
-                                                accidentDto.getLocation().getLongitude(),
-                                                accidentDto.getAccidentData().getType()
-                                        )
-                                );
+                                if (accidentDto.getLocation().getLatitude() == 0 && accidentDto.getLocation().getLongitude() == 0){
+                                    LatLng latLng = GoogleServices.getLocationFromAddress(context, accidentDto.getLocation().getAddress());
+                                    if (latLng != null) {
+                                        requireActivity().runOnUiThread(() ->
+                                                createMarkers(
+                                                        googleMap,
+                                                        latLng.latitude,
+                                                        latLng.longitude,
+                                                        accidentDto.getAccidentData().getType()
+                                                )
+                                        );
+                                    }
+                                }else {
+                                    requireActivity().runOnUiThread(() ->
+                                            createMarkers(
+                                                    googleMap,
+                                                    accidentDto.getLocation().getLatitude(),
+                                                    accidentDto.getLocation().getLongitude(),
+                                                    accidentDto.getAccidentData().getType()
+                                            )
+                                    );
+                                }
                             }
                         }
                     }
