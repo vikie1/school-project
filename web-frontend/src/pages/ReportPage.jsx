@@ -14,16 +14,27 @@ export const ReportPage = (props) => {
 
   let accidentData = {};
   let location = {};
-  let finalData = { };
+  let finalData = {};
 
   const dataFromForms = (data, nextStep) => {
     setSteps(nextStep);
     if (nextStep === 2) {
       accidentData = { ...data };
+      localStorage.setItem('accidentData', JSON.stringify(accidentData));
     } else if (nextStep === 3) {
       location = {...data };
+      localStorage.setItem('location', JSON.stringify(location));
     } else if (nextStep === 4) {
-      accidentData = {accidentData, ...data};
+      const localStorageBkp = localStorage.getItem('accidentData');
+      const oldAccidentData = JSON.parse(localStorageBkp);
+      accidentData = {oldAccidentData, ...data};
+      localStorage.removeItem('accidentData')
+      localStorage.setItem('accidentData', JSON.stringify(accidentData))
+    } else if(nextStep === 5){
+      accidentData = JSON.parse(localStorage.getItem('accidentData'));
+      location = JSON.parse(localStorage.getItem('location'));
+      finalData = {...data, accidentData, location};
+      console.log(finalData);
     }
   };
 

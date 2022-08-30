@@ -8,9 +8,9 @@ export const ThirdStep = ({ dataFromForms }) => {
   const [date, setDate] = useState(null);
   const [appTime, setAppTime] = useState(null);
 
-  const { inputs, center, inputWrapper, formStyle, button } = thirdStepStyles();
+  const { inputs, inputWrapper, formStyle, button } = thirdStepStyles();
 
-  const time = date + " " + appTime;
+  const time = date + "T" + appTime;
 
   const data = {description, casualtiesDescription, date, time};
 
@@ -86,7 +86,7 @@ export const ThirdStep = ({ dataFromForms }) => {
               onChange={(e) => setAppTime(e.target.value)}
             />
           </div>
-          <button onClick={() => dataFromForms(data, 4)}>Click me</button>
+          <button onClick={() => dataFromForms(data, 4)} css={button}>Proceed</button>
         </form>
       </div>
     </>
