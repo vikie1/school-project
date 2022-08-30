@@ -5,7 +5,7 @@ import { useState } from "react";
 export const FirstStep = ({ dataFromForms }) => {
   const [type, setType] = useState(null);
   const [cause, setCause] = useState(null);
-  const [causalVehicleType, setCausalVehicleType] = useState(null);
+  const [causalVehicleType, setCausalVehicleType] = useState('PSV');
   const [causalVehicleGroup, setCausalVehicleGroup] = useState(null);
   const [totalVehiclesInvolved, setTotalVehiclesInvolved] = useState(null);
   const [passengerCasualties, setPassengerCasualties] = useState(null);

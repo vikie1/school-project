@@ -22,6 +22,8 @@ export const ReportPage = (props) => {
       accidentData = { ...data };
     } else if (nextStep === 3) {
       location = {...data };
+    } else if (nextStep === 4) {
+      accidentData = {accidentData, ...data};
     }
   };
 
