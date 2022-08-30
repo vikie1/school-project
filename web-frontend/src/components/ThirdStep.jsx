@@ -14,7 +14,7 @@ export const ThirdStep = ({ dataFromForms }) => {
 
   const data = {description, casualtiesDescription, date, time};
 
-  const handleSubmit = (e) => e.preventDefault;
+  const handleSubmit = (e) => e.preventDefault();
 
   return (
     <>
@@ -104,11 +104,6 @@ export const thirdStepStyles = () => {
     padding: 5px;
   `;
 
-  const center = css`
-    margin: auto;
-    text-align: center;
-  `;
-
   const inputWrapper = css`
     width: 300px;
   `;
@@ -133,5 +128,5 @@ export const thirdStepStyles = () => {
     }
   `;
 
-  return { inputs, center, inputWrapper, formStyle, button };
+  return { inputs, inputWrapper, formStyle, button };
 };

@@ -31,7 +31,7 @@ export const FirstStep = ({ dataFromForms }) => {
 
   const { inputs, center, inputWrapper, formStyle, button } = firstStepStyles();
 
-  const handleSubmit = (e) => e.preventDefault;
+  const handleSubmit = (e) => e.preventDefault();
 
   return (
     <>

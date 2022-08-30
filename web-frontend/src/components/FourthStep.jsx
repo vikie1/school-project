@@ -3,16 +3,16 @@ import { css } from "@emotion/react";
 import { useState } from "react";
 import { firstStepStyles } from "./FirstStep";
 
-export const FourthStep = ({ dataFromForms }) => {
+export const FourthStep = ({ dataFromForms, isLoading }) => {
   const [reporterName, setReporterName] = useState(null);
   const [reporterEmail, setReporterEmail] = useState(null);
   const [reporterContact, setReporterContact] = useState(null);
 
   const { inputs, inputWrapper, formStyle, button } = firstStepStyles();
 
-  const data = {reporterName, reporterContact, reporterEmail};
+  const data = { reporterName, reporterContact, reporterEmail };
 
-  const handleSubmit = (e) => e.preventDefault;
+  const handleSubmit = (e) => e.preventDefault();
 
   return (
     <>
@@ -67,9 +67,19 @@ export const FourthStep = ({ dataFromForms }) => {
             />
           </div>
 
-          <button onClick={() => dataFromForms(data, 5)} css={button}>
-            Finish
-          </button>
+          {isLoading ? (
+            <button
+              onClick={() => dataFromForms(data, 5)}
+              css={button}
+              disabled
+            >
+              Done
+            </button>
+          ) : (
+            <button onClick={() => dataFromForms(data, 5)} css={button}>
+              Finish
+            </button>
+          )}
         </form>
       </div>
     </>

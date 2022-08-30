@@ -12,7 +12,7 @@ export const SecondStep = ({ dataFromForms }) => {
 
   const data = {address, streetAddress, locality, city, pinCode};
 
-  const handleSubmit = (e) => e.preventDefault;
+  const handleSubmit = (e) => e.preventDefault();
 
   const { inputs, inputWrapper, formStyle, button } = secondStepStyles();
 
@@ -101,11 +101,6 @@ export const secondStepStyles = () => {
     border-radius: 3px;
     margin-bottom: 5px;
     padding: 5px;
-  `;
-
-  const center = css`
-    margin: auto;
-    text-align: center;
   `;
 
   const inputWrapper = css`
