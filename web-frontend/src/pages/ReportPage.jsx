@@ -12,9 +12,17 @@ export const ReportPage = (props) => {
 
   const { root, main } = reportPageStyles();
 
+  let accidentData = {};
+  let location = {};
+  let finalData = { };
+
   const dataFromForms = (data, nextStep) => {
     setSteps(nextStep);
-    console.log(data, nextStep);
+    if (nextStep === 2) {
+      accidentData = { ...data };
+    } else if (nextStep === 3) {
+      location = {...data };
+    }
   };
 
   return (

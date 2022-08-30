@@ -40,7 +40,7 @@ export const FirstStep = ({ dataFromForms }) => {
         <form onSubmit={handleSubmit} css={formStyle}>
           <div css={inputWrapper}>
             <input
-              css={inputs}
+              css={[inputs, css`width: 96%;`]}
               type="text"
               name="accidentType"
               id="accidentType"
@@ -51,7 +51,7 @@ export const FirstStep = ({ dataFromForms }) => {
           </div>
           <div css={inputWrapper}>
             <input
-              css={inputs}
+              css={[inputs, css`width: 96%;`]}
               type="text"
               name="accidentCause"
               id="accidentCause"
@@ -62,7 +62,7 @@ export const FirstStep = ({ dataFromForms }) => {
           </div>
           <div css={inputWrapper}>
             <select
-              css={inputs}
+              css={[inputs, css`width: 100%;`]}
               id="cars"
               name="cars"
               value={causalVehicleType}
@@ -78,7 +78,7 @@ export const FirstStep = ({ dataFromForms }) => {
           </div>
           <div css={inputWrapper}>
             <input
-              css={inputs}
+              css={[inputs, css`width: 96%;`]}
               type="text"
               name="causalVehicleGroup"
               id="causalVehicleGroup"
@@ -89,11 +89,11 @@ export const FirstStep = ({ dataFromForms }) => {
           </div>
           <div css={inputWrapper}>
             <input
-              css={inputs}
+              css={[inputs, css`width: 96%;`]}
               type="number"
               name="totalVehiclesInvolved"
               id="totalVehiclesInvolved"
-              placeholder="Enter info on the car e.g number plates"
+              placeholder="Enter number of vehicles involved/affected"
               value={totalVehiclesInvolved}
               onChange={(e) => setTotalVehiclesInvolved(e.target.value)}
             />
@@ -147,7 +147,7 @@ export const FirstStep = ({ dataFromForms }) => {
           </div>
           <div>
             <button onClick={() => dataFromForms(data, 2)} css={button}>
-              Click me
+              Proceed
             </button>
           </div>
         </form>
@@ -165,7 +165,6 @@ export const firstStepStyles = () => {
     border-radius: 3px;
     margin-bottom: 5px;
     padding: 5px;
-    width: 80%;
   `;
 
   const center = css`
