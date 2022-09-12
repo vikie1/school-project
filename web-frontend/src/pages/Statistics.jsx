@@ -1,23 +1,57 @@
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from "recharts";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { BarChart, Bar, XAxis, YAxis, Legend } from "recharts";
+import { Header } from "../components/Header";
+import { useFetch } from "../hooks/useFetch";
 
 export const Statistics = (props) => {
-  // Sample data
-  const data = [
-    { name: "Technical scripter", students: 700 },
-    { name: "Geek-i-knack", students: 200 },
-    { name: "Geeksforgeeks", students: 400 },
-    { name: "Geek-o-mania", students: 1000 },
-  ];
+  const byTime = useFetch("/api/analytics/time");
+  let timeBarData = {};
+  if (!byTime.data && byTime.isLoading) {
+    timeBarData = [{ timeSlot: "loading", totalAccidents: 0 }];
+  }
+  if (byTime.data) {
+    timeBarData = byTime.data.analytics;
+  }
+  if (!byTime.data && byTime.error) {
+    console.error(byTime.error);
+    timeBarData = [{ timeSlot: "error", totalAccidents: 0 }];
+  }
+
   return (
     <>
-      <h1>TEST BAR CHART LIBRARY FOR REACTJS</h1>
-      <div>
-        <BarChart width={600} height={600} data={data}>
-          <Bar dataKey="students" fill="green" />
-          {/* <CartesianGrid stroke="#ccc" /> */}
-          <XAxis dataKey="name" />
-          <YAxis />
-        </BarChart>
+      <div
+        css={css`
+          background-color: #070049;
+          height: 100vh;
+        `}
+      >
+        <Header pageTitle={"Analytics - Time"} />
+        <div css={css`display: flex;`}>
+          <div>
+            <h1
+              css={css`
+                color: white;
+                text-align: center;
+              `}
+            >
+              BAR CHART OF ACCIDENT OCCURENCE AGAINST TIME
+            </h1>
+            <BarChart
+              title="Accidents occurrence by time"
+              width={700}
+              height={500}
+              data={timeBarData}
+            >
+              <Bar dataKey="totalAccidents" fill="#a328f5" />
+              {/* <CartesianGrid stroke="#ccc" /> */}
+              <XAxis dataKey="timeSlot" />
+              <YAxis />
+              <Legend />
+            </BarChart>
+          </div>
+          
+        </div>
       </div>
     </>
   );
