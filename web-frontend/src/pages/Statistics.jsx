@@ -18,6 +18,18 @@ export const Statistics = (props) => {
     timeBarData = [{ timeSlot: "error", totalAccidents: 0 }];
   }
 
+  let byCar = useFetch('/api/analytics/car');
+  let carBarData = {};
+  if (!byCar.data && byCar.isLoading) {
+    carBarData = [{ carType: "loading", totalAccidents: 0 }];
+  }
+  if (byCar.data) {
+    carBarData = byCar.data.analytics;
+  }
+  if (!byCar.data && byCar.error) {
+    console.error(byCar.error);
+    carBarData = [{ carType: "error", totalAccidents: 0 }];
+  }
   return (
     <>
       <div
@@ -50,7 +62,28 @@ export const Statistics = (props) => {
               <Legend />
             </BarChart>
           </div>
-          
+          <div>
+            <h1
+              css={css`
+                color: white;
+                text-align: center;
+              `}
+            >
+              BAR CHART OF ACCIDENT OCCURENCE AGAINST VEHICLE TYPE
+            </h1>
+            <BarChart
+              title="Accidents occurrence by time"
+              width={600}
+              height={500}
+              data={carBarData}
+            >
+              <Bar dataKey="totalAccidents" fill="#61c04f" />
+              {/* <CartesianGrid stroke="#ccc" /> */}
+              <XAxis dataKey="carType" />
+              <YAxis />
+              <Legend />
+            </BarChart>
+          </div>
         </div>
       </div>
     </>
